@@ -14,15 +14,15 @@ import org.vafer.jdeb.ant.Mapper;
 import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
-public class Main {
+public class CondomOnlyMain2 {
 
 	private static final String JOBNAME = "2014012";
-	private static final String INPUTPATH = "posdata";
-	private static final String OUTPUTPATH = "out/condomPlusEnergy1st";
+	private static final String INPUTPATH = "out/condomOnly1st";
+	private static final String OUTPUTPATH = "out/condomOnly2nd";
 
-	private static final Class JARCLASS = Main.class;
-	private static final Class MAPPERCLASS = CondomMapper.class;
-	private static final Class REDUCERCLASS = CondomReducer.class;
+	private static final Class JARCLASS = CondomOnlyMain2.class;
+	private static final Class MAPPERCLASS = CondomMapper2.class;
+	private static final Class REDUCERCLASS = CondomOnlyReducer2.class;
 
 	/**
 	 * ここでMapReduceを実行
@@ -44,12 +44,9 @@ public class Main {
 		job.setOutputValueClass(CSKV.class);
 
 		//インプットファイルのパスを指定
-		if (args.length > 0) {
-			FileInputFormat.setInputPaths(job, new Path(args[0]));
-		} else {
-			FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
-		}
+		FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
 		FileOutputFormat.setOutputPath(job, new Path(OUTPUTPATH));
+
 		//いったんアウトプットパスを削除して，ロック状態を解放しておく
 		PosUtils.deleteOutputDir(OUTPUTPATH);
 

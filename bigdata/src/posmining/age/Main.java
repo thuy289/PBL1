@@ -45,7 +45,11 @@ public class Main {
 		job.setOutputValueClass(CSKV.class);
 
 		//インプットファイルのパスを指定
-		FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
+		if (args.length > 0) {
+			FileInputFormat.setInputPaths(job, new Path(args[0]));
+		} else {
+			FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
+		}
 		FileOutputFormat.setOutputPath(job, new Path(OUTPUTPATH));
 
 		//いったんアウトプットパスを削除して，ロック状態を解放しておく

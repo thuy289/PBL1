@@ -14,15 +14,15 @@ import org.vafer.jdeb.ant.Mapper;
 import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
-public class Main {
+public class CondomOnlyMain1 {
 
 	private static final String JOBNAME = "2014012";
 	private static final String INPUTPATH = "posdata";
-	private static final String OUTPUTPATH = "out/condomPlusEnergy1st";
+	private static final String OUTPUTPATH = "out/condomOnly1st";
 
-	private static final Class JARCLASS = Main.class;
+	private static final Class JARCLASS = CondomOnlyMain1.class;
 	private static final Class MAPPERCLASS = CondomMapper.class;
-	private static final Class REDUCERCLASS = CondomReducer.class;
+	private static final Class REDUCERCLASS = CondomOnlyReducer.class;
 
 	/**
 	 * ここでMapReduceを実行

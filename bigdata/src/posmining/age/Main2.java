@@ -43,7 +43,6 @@ public class Main2 {
 		job.setOutputKeyClass(CSKV.class);
 		job.setOutputValueClass(CSKV.class);
 
-		//インプットファイルのパスを指定
 		FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
 		FileOutputFormat.setOutputPath(job, new Path(OUTPUTPATH));
 

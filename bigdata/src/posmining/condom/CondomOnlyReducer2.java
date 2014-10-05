@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Reducer.Context;
 
 import posmining.utils.CSKV;
 
-public class CondomReducer2 extends Reducer<CSKV, CSKV, CSKV, CSKV> {
+public class CondomOnlyReducer2 extends Reducer<CSKV, CSKV, CSKV, CSKV> {
 
 	@Override
 	protected void reduce(CSKV key, Iterable<CSKV> values, Context context) throws IOException, InterruptedException {
@@ -17,7 +17,7 @@ public class CondomReducer2 extends Reducer<CSKV, CSKV, CSKV, CSKV> {
 			count += value.toLong();
 		}
 
-		context.write(new CSKV("comdomPlusEnergyNum") , new CSKV(count));
+		context.write(new CSKV("comdomNum") , new CSKV(count));
 	}
 
 }

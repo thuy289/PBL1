@@ -47,6 +47,7 @@ public class Main2 {
 		FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
 		FileOutputFormat.setOutputPath(job, new Path(OUTPUTPATH));
 
+
 		//いったんアウトプットパスを削除して，ロック状態を解放しておく
 		PosUtils.deleteOutputDir(OUTPUTPATH);
 

@@ -15,13 +15,16 @@ public class AgeMapper2 extends Mapper<LongWritable, Text, CSKV, CSKV> {
 	@Override
 	protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+		System.out.println("string: " + value.toString());
 		String[] csv = value.toString().split("\t");
 
+		System.out.println("csvLength: " + csv.length);
 		String receiptId = csv[0];
 		String ageFlg = csv[1];
 
 		String year = receiptId.split("-")[0];
-		String mapKey = year + ", " +ageFlgConvert(ageFlg);
+		String flg = ageFlgConvert(ageFlg);
+		String mapKey = year + ", " + ageFlgConvert(ageFlg);
 
 		context.write(new CSKV(mapKey), new CSKV(1));
 	}
@@ -40,19 +43,19 @@ public class AgeMapper2 extends Mapper<LongWritable, Text, CSKV, CSKV> {
 		switch (ageFlgInt) {
 
 			case 1:
-				retString = "子供";
+				retString = "child";
 				break;
 
 			case 2:
-				retString = "若者";
+				retString = "young";
 				break;
 
 			case 3:
-				retString = "大人";
+				retString = "adult";
 				break;
 
 			case 4:
-				retString = "実年";
+				retString = "senior";
 				break;
 
 			default:

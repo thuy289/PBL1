@@ -14,7 +14,7 @@ public class CondomReducer extends Reducer<CSKV, CSKV, CSKV, CSKV> {
 	protected void reduce(CSKV key, Iterable<CSKV> values, Context context) throws IOException, InterruptedException {
 
 		boolean condomFlg = false;
-		boolean energyDrinkFlg = true;
+		boolean energyDrinkFlg = false;
 
 		for (CSKV value : values) {
 
