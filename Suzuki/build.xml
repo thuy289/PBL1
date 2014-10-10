@@ -5,23 +5,33 @@
 	<!-- 各メンバー固有のプロパティファイルの読み込み -->
 	<import file="build-common.xml" />
 
+	<!-- 実年利用時間 1st -->
+		<target name="run.TimezoneCountByAge1" depends="prepare">
+			<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+				command="hadoop jar main.jar posmining.time.TimezoneCountByAge1 s3://cspiral-posdata/"
+			/>
+		</target>
 
+	<!-- 実年利用時間 2st -->
+			<target name="run.TimezoneCountByAge2" depends="prepare">
+				<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+					command="hadoop jar main.jar posmining.time.TimezoneCountByAge2 /user/hadoop/out/timezoneCountByAge1"
+				/>
+			</target>
 
-	<!-- おにぎり種別総数 -->
-	<target name="run.OnigiriCountByType" depends="prepare">
-		<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
-			command="hadoop jar main.jar posmining.example.OnigiriCountByType s3://cspiral-posdata/"
-		/>
-	</target>
+	<!-- 実年の種類別分布  1st-->
+		<target name="run.kindCountByAge1" depends="prepare">
+			<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+				command="hadoop jar main.jar posmining.kind.kindCountByAge1 s3://cspiral-posdata/"
+			/>
+		</target>
 
-	<!-- おにぎり総数 -->
-	<target name="run.OnigiriCount" depends="prepare">
-		<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
-			command="hadoop jar main.jar posmining.example.OnigiriCount s3://cspiral-posdata/"
-		/>
-	</target>
-
-
+	<!-- 実年の種類別分布  2st-->
+			<target name="run.kindCountByAge2" depends="prepare">
+				<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+					command="hadoop jar main.jar posmining.kind.kindCountByAge2 /user/hadoop/out/kindCountByAge1"
+				/>
+			</target>
 
 	<!-- クラスタ実行のための準備タスク．プロジェクトをビルドしてJARに固めてSCPで送信する -->
 	<target name="prepare">
