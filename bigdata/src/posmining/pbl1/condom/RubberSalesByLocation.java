@@ -67,7 +67,7 @@ public class RubberSalesByLocation {
 			String csv[] = value.toString().split(",");
 
 			// コンドームでないレシートは無視
-			if (csv[PosUtils.ITEM_CATEGORY_NAME].equals("コンドーム・スキン") == false) {
+			if (!csv[PosUtils.ITEM_CATEGORY_NAME].equals("コンドーム・スキン")) {
 				return;
 			}
 
@@ -99,7 +99,7 @@ public class RubberSalesByLocation {
 		protected void reduce(CSKV key, Iterable<CSKV> values, Context context) throws IOException, InterruptedException {
 
 			// 売り上げを合計
-			int count = 0;
+			long count = 0;
 			for (CSKV value : values) {
 				count += value.toInt();
 			}
