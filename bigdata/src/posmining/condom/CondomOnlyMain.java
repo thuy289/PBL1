@@ -17,11 +17,11 @@ import posmining.utils.PosUtils;
 public class CondomOnlyMain {
 
 	private static final String JOBNAME = "2014012";
-	private static final String INPUTPATH = "out/condomPlusEnergy1st";
-	private static final String OUTPUTPATH = "out/condomPlusEnergy2nd";
+	private static final String INPUTPATH = "posdata";
+	private static final String OUTPUTPATH = "out/condomOnly1st";
 
 	private static final Class JARCLASS = CondomOnlyMain.class;
-	private static final Class MAPPERCLASS = CondomMapper2.class;
+	private static final Class MAPPERCLASS = CondomMapper.class;
 	private static final Class REDUCERCLASS = CondomOnlyReducer.class;
 
 	/**
@@ -44,9 +44,12 @@ public class CondomOnlyMain {
 		job.setOutputValueClass(CSKV.class);
 
 		//インプットファイルのパスを指定
-		FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
+		if (args.length > 0) {
+			FileInputFormat.setInputPaths(job, new Path(args[0]));
+		} else {
+			FileInputFormat.setInputPaths(job, new Path(INPUTPATH));
+		}
 		FileOutputFormat.setOutputPath(job, new Path(OUTPUTPATH));
-
 		//いったんアウトプットパスを削除して，ロック状態を解放しておく
 		PosUtils.deleteOutputDir(OUTPUTPATH);
 

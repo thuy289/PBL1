@@ -13,22 +13,13 @@ public class CondomOnlyReducer extends Reducer<CSKV, CSKV, CSKV, CSKV> {
 	@Override
 	protected void reduce(CSKV key, Iterable<CSKV> values, Context context) throws IOException, InterruptedException {
 
-		boolean condomFlg = false;
-		boolean energyDrinkFlg = true;
 
 		for (CSKV value : values) {
 
 			if (value.toString().equals("コンドーム・スキン")) {
-				condomFlg = true;
+				context.write(key, new CSKV(1));
 			}
 
-			if (value.toString().equals("栄養補給ドリンク")) {
-				energyDrinkFlg = true;
-			}
-		}
-
-		if (condomFlg && energyDrinkFlg) {
-			context.write(key, new CSKV(1));
 		}
 
 	}
